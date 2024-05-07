@@ -2,10 +2,18 @@
   "name": "artifact-canvas",
   "version": "0.0.1",
   "type": "module",
-  "main": "./dist/index.js",
+  "files": ["dist/**"],
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
+    }
+  },
   "scripts": {
     "start": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vue-tsc && vite build && node ./src/shell/build.js",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -30,6 +38,5 @@
     "glslify": "^7.1.1",
     "glslify-loader": "^2.0.0",
     "vue-tsc": "^2.0.6"
-  },
-  "files": ["dist/**"]
+  }
 }

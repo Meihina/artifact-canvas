@@ -9,7 +9,7 @@ import { PropType, defineComponent, onMounted, ref } from 'vue'
 import defaultShader from '../shader/default.glsl'
 import GlslCanvas from 'glslCanvas';
 
-export const Props = {
+const Props = {
 	width: {
 		type: Number as PropType<number>,
 		default: 300,
