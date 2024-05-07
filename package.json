@@ -1,8 +1,8 @@
 {
-  "name": "my-vue-app",
-  "private": true,
-  "version": "0.0.0",
+  "name": "artifact-canvas",
+  "version": "0.0.1",
   "type": "module",
+  "main": "./dist/index.js",
   "scripts": {
     "start": "vite",
     "build": "vue-tsc && vite build",
@@ -30,5 +30,6 @@
     "glslify": "^7.1.1",
     "glslify-loader": "^2.0.0",
     "vue-tsc": "^2.0.6"
-  }
+  },
+  "files": ["dist/**"]
 }

@@ -1,18 +1,28 @@
 
 <template>
-  <!-- <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div> -->
-  <GlslCanvas />
+  <GlslCanvas :width="250" :height="150" :shader="shader" :uniforms="uniforms" />
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import testShader from './shader/test.glsl';
 import GlslCanvas from './components/glsl-canvas.vue';
+
+const shader = ref<string>(testShader);
+const uniforms = ref<Record<string, any>>({
+  'u_random': .1,
+});
+
+const set = (timestamp: number) => {
+  if (timestamp % 1000 < 10) {
+    uniforms.value['u_random'] += .1;
+  }
+  requestAnimationFrame(set);
+};
+
+onMounted(() => {
+  requestAnimationFrame(set);
+});
 </script>
 
 <style scoped>

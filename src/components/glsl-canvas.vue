@@ -1,31 +1,55 @@
 <template>
 	<div class="contain">
-		<canvas id="glsl-canvas"></canvas>
+		<canvas id="glsl-canvas" :width="width" :height="height"></canvas>
 	</div>
 </template>
   
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import { PropType, defineComponent, onMounted, ref } from 'vue'
 import defaultShader from '../shader/default.glsl'
 import GlslCanvas from 'glslCanvas';
 
+export const Props = {
+	width: {
+		type: Number as PropType<number>,
+		default: 300,
+	},
+	height: {
+		type: Number as PropType<number>,
+		default: 300,
+	},
+	shader: {
+		type: String as PropType<string>,
+		default: defaultShader,
+	},
+	uniforms: {
+		type: Object as PropType<Record<string, any>>,
+		default: () => ({}),
+	},
+};
+
 export default defineComponent({
 	name: 'GlslCanvas',
-	setup() {
+	props: Props,
+	setup(props) {
 		const glslcanvas = ref<any>();
     const glslSandbox = ref<any>();
-
+		
 		const step = (timestamp: number) => {
+			const { width, height } = props;
 			glslSandbox.value.setUniform('u_time', timestamp);
-			glslSandbox.value.setUniform('u_resolution', glslcanvas.value.width, glslcanvas.value.height);
+			glslSandbox.value.setUniform('u_resolution', width, height);
+			Object.entries(props.uniforms).forEach(([key, value]) => {
+				glslSandbox.value.setUniform(key, value);
+			});
 			requestAnimationFrame(step);
 	};
 
 		onMounted(() => {
-			console.log(defaultShader);
+			const { shader } = props;
 			glslcanvas.value = document.getElementById('glsl-canvas') as HTMLCanvasElement;
 			glslSandbox.value = new GlslCanvas(glslcanvas.value);
-			glslSandbox.value.load(defaultShader);
+			glslSandbox.value.load(shader);
 			requestAnimationFrame(step);
 		});
 	},
@@ -36,9 +60,6 @@ export default defineComponent({
 .contain {
 	position: relative;
 	width: 100%;
-	// box-sizing: border-box;
-	// padding: 12px;
-	// text-align: center;
 }
 </style>
   

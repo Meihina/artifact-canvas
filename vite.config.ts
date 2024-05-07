@@ -12,8 +12,8 @@ export default defineConfig({
     outDir: "dist", // 输出文件名称
     lib: {
       entry: path.resolve(__dirname, "./src/index.ts"), // 指定组件编译入口文件
-      name: "artifact-canvas",
-      fileName: "artifact-canvas",
+      name: "index",
+      fileName: "index",
     }, //库编译模式配置
     rollupOptions: {
       external: ["vue", "vue-router"],
