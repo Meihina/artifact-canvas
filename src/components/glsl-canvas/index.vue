@@ -6,7 +6,7 @@
   
 <script lang="ts">
 import { PropType, defineComponent, onMounted, ref } from 'vue'
-import defaultShader from '../shader/default.glsl'
+import defaultShader from '../../shader/default.glsl'
 import GlslCanvas from 'glslCanvas';
 
 const Props = {

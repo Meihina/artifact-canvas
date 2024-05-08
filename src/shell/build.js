@@ -1,61 +1,40 @@
-import { defineConfig, build } from 'vite'
-// import { glslify } from 'vite-plugin-glslify'
-// import vue from '@vitejs/plugin-vue'
+import { defineConfig, build } from "vite";
 import path from "path";
+import fs from "fs";
 
 const __dirname = path.resolve();
-
-// const baseConfig = defineConfig({
-//   plugins: [
-//     vue(),
-//     glslify()
-//   ],
-// });
+const entryDir = path.resolve(__dirname, "./src/components");
 
 // rollup打包配置
 const rollupOptions = {
-  external: ["vue", "vue-router"],
+  external: ["vue", "vue-router", /node_modules/],
   output: {
     globals: {
-        vue: "Vue",
+      vue: "Vue",
     },
   },
 };
 
-// 全量构建
-const buildAll = async () => {
+// 单一构建
+const buildSingle = async (name, entry) => {
   await build(defineConfig({
     build: {
-      outDir: "lib", // 输出文件名称
+      outDir: `dist/${name}`,
       lib: {
-        entry: path.resolve(__dirname, "./src/index.ts"), // 指定组件编译入口文件
-        name: "ArtifactCanvas",
-        fileName: "index",
+        entry,
+        name,
+        fileName: 'index',
       }, // 库编译模式配置
+      exclude: ['src/public'], // 排除不需要打包的文件
       ...rollupOptions,
     },
   }));
 };
 
-// 单一构建
-// const buildSingle = async (name: string) => {
-//   await build(defineConfig({
-//     ...baseConfig,
-//     build: {
-//       outDir: "dist", // 输出文件名称
-//       lib: {
-//         entry: entryDir, // 指定组件编译入口文件
-//         name: "ArtifactCanvas",
-//         fileName: "index",
-//       }, // 库编译模式配置
-//       ...rollupOptions,
-//     },
-//   }));
-// };
-
-
-const start2Build = () => {
-  buildAll();
-};
-
-start2Build();
+fs.readdirSync(entryDir).map(name => {
+  const componentDir = path.resolve(entryDir, name); // 组件目录
+  const isDir = fs.lstatSync(componentDir).isDirectory();
+  if (isDir) {
+    buildSingle(name, path.resolve(componentDir, './index.ts'));
+  }
+})

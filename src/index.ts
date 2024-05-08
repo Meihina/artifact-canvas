@@ -1,14 +1,15 @@
-import GlslCanvas from "./components/glsl-canvas.vue";
-import P5Canvas from "./components/p5-canvas.vue";
+import { type App } from "vue";
+import GlslCanvas from "./components/glsl-canvas/index.vue";
+import P5Canvas from "./components/p5-canvas/index.vue";
 
 export { GlslCanvas, P5Canvas };
 
 const component = [GlslCanvas, P5Canvas];
 
 const M = {
-	install(App: any) {
+	install(App: App) {
 		component.forEach((item) => {
-			App.component(item.name, item);
+			App.component(item.name!, item);
 		});
 	},
 };
