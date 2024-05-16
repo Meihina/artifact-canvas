@@ -17,24 +17,26 @@ const rollupOptions = {
 
 // 单一构建
 const buildSingle = async (name, entry) => {
-  await build(defineConfig({
-    build: {
-      outDir: `dist/${name}`,
-      lib: {
-        entry,
-        name,
-        fileName: 'index',
-      }, // 库编译模式配置
-      exclude: ['src/public'], // 排除不需要打包的文件
-      ...rollupOptions,
-    },
-  }));
+  await build(
+    defineConfig({
+      build: {
+        outDir: `dist/${name}`,
+        lib: {
+          entry,
+          name,
+          fileName: "index",
+        }, // 库编译模式配置
+        exclude: ["src/public"], // 排除不需要打包的文件
+        ...rollupOptions,
+      },
+    })
+  );
 };
 
-fs.readdirSync(entryDir).map(name => {
+fs.readdirSync(entryDir).map((name) => {
   const componentDir = path.resolve(entryDir, name); // 组件目录
   const isDir = fs.lstatSync(componentDir).isDirectory();
   if (isDir) {
-    buildSingle(name, path.resolve(componentDir, './index.ts'));
+    buildSingle(name, path.resolve(componentDir, "./index.ts"));
   }
-})
+});
