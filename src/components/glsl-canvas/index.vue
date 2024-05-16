@@ -33,7 +33,7 @@ export default defineComponent({
 	props: Props,
 	setup(props) {
 		const glslcanvas = ref<any>();
-    const glslSandbox = ref<any>();
+    	const glslSandbox = ref<any>();
 		
 		const step = (timestamp: number) => {
 			const { width, height } = props;
@@ -43,7 +43,7 @@ export default defineComponent({
 				glslSandbox.value.setUniform(key, value);
 			});
 			requestAnimationFrame(step);
-	};
+		};
 
 		onMounted(() => {
 			const { shader } = props;
