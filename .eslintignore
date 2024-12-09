@@ -1,0 +1,12 @@
+lib/
+dist/
+es/
+types/
+unpkg/
+node_modules/
+build/
+dist.js
+
+src/shell/
+src/main.js
+src/index.js

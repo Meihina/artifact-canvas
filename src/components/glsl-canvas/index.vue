@@ -6,8 +6,9 @@
 
 <script lang="ts">
 import { PropType, defineComponent, onMounted, ref } from "vue";
-import defaultShader from "../../shader/default.glsl";
 import GlslCanvas from "glslCanvas";
+import defaultShader from "../../shader/default.glsl";
+import { KEY } from "./const";
 
 const Props = {
   width: {
@@ -46,6 +47,7 @@ export default defineComponent({
     };
 
     onMounted(() => {
+      console.log(KEY);
       const { shader } = props;
       glslcanvas.value = document.getElementById(
         "glsl-canvas"
@@ -59,6 +61,8 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
+@import "./assets/styles.less";
+
 .contain {
   position: relative;
   width: 100%;

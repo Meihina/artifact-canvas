@@ -6,13 +6,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
+import { stringify } from "qs";
+
+interface IP5 {
+  element?: HTMLElement;
+}
 
 export default defineComponent({
   name: "P5Canvas",
   setup() {
-    onMounted(() => {
-      console.log("Hi, man.");
+    const ele = ref<IP5>({});
+
+    onMounted(async () => {
+      console.log("Hi, man." + ele);
+      console.log(stringify({ a: 1 }));
+      const hate = new Promise((resolve) => {
+        resolve(1);
+      });
+      await hate;
     });
   },
 });
