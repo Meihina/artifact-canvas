@@ -1,6 +1,7 @@
 <template>
   <div class="contain">
     <canvas id="glsl-canvas" :width="width" :height="height"></canvas>
+    <Happy></Happy>
   </div>
 </template>
 
@@ -8,6 +9,7 @@
 import { PropType, defineComponent, onMounted, ref } from "vue";
 import GlslCanvas from "glslCanvas";
 import defaultShader from "../../shader/default.glsl";
+import Happy from "./components/happy.vue";
 import { KEY } from "./const";
 
 const Props = {

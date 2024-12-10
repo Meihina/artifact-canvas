@@ -51,6 +51,7 @@ const buildSingle = async (name, entry) => {
         entry,
         name,
         fileName: "index",
+        formats: ["es", "cjs"],
       }, // 库编译模式配置
       rollupOptions: {
         external: ["qs", "vue"],
