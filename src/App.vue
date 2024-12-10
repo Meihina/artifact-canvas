@@ -10,9 +10,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-// import { GlslCanvas } from "artifact-canvas/glsl-canvas";
+import { GlslCanvas } from "artifact-canvas/glsl-canvas";
 import testShader from "./shader/default.glsl";
-import GlslCanvas from "./components/glsl-canvas/index.vue";
+// import GlslCanvas from "./components/glsl-canvas/index.vue";
 
 const shader = ref<string>(testShader);
 const uniforms = ref<Record<string, any>>({
