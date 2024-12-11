@@ -1,11 +1,11 @@
-import path from "path";
-import fs from "fs";
+import path from 'path';
+import fs from 'fs';
 
-import { defineConfig, build } from "vite";
+import { defineConfig, build } from 'vite';
 
 const __dirname = path.resolve();
-const entryDir = path.resolve(__dirname, "./src/components");
-const entryDirAll = path.resolve(__dirname, "./src/index.js");
+const entryDir = path.resolve(__dirname, './src/components');
+const entryDirAll = path.resolve(__dirname, './src/index.js');
 
 // ESM/CJS 全量构建方法
 const buildAll = async () => {
@@ -14,26 +14,26 @@ const buildAll = async () => {
     build: {
       lib: {
         entry: entryDirAll,
-        name: "index",
-        fileName: "index",
+        name: 'index',
+        fileName: 'index',
       }, // 库编译模式配置
       rollupOptions: {
-        external: ["qs", "vue"],
+        external: ['qs', 'vue'],
         output: [
           {
-            dir: "dist",
-            format: "es",
-            name: "index",
-            exports: "named",
-            entryFileNames: "index.js",
+            dir: 'dist',
+            format: 'es',
+            name: 'index',
+            exports: 'named',
+            entryFileNames: 'index.js',
             minifyInternalExports: false,
           },
           {
-            dir: "dist",
-            format: "cjs",
-            name: "index",
-            exports: "named",
-            entryFileNames: "index.cjs",
+            dir: 'dist',
+            format: 'cjs',
+            name: 'index',
+            exports: 'named',
+            entryFileNames: 'index.cjs',
           },
         ],
       },
@@ -50,26 +50,26 @@ const buildSingle = async (name, entry) => {
       lib: {
         entry,
         name,
-        fileName: "index",
-        formats: ["es", "cjs"],
+        fileName: 'index',
+        formats: ['es', 'cjs'],
       }, // 库编译模式配置
       rollupOptions: {
-        external: ["qs", "vue"],
+        external: ['qs', 'vue'],
         output: [
           {
             dir: `es/${name}`,
-            format: "es",
-            name: "index",
-            exports: "named",
-            entryFileNames: "index.js",
+            format: 'es',
+            name: 'index',
+            exports: 'named',
+            entryFileNames: 'index.js',
             minifyInternalExports: false,
           },
           {
             dir: `lib/${name}`,
-            format: "cjs",
-            name: "index",
-            exports: "named",
-            entryFileNames: "index.cjs",
+            format: 'cjs',
+            name: 'index',
+            exports: 'named',
+            entryFileNames: 'index.cjs',
           },
         ],
       },
@@ -82,7 +82,7 @@ fs.readdirSync(entryDir).map((name) => {
   const componentDir = path.resolve(entryDir, name); // 组件目录
   const isDir = fs.lstatSync(componentDir).isDirectory();
   if (isDir) {
-    buildSingle(name, path.resolve(componentDir, "./index.ts"));
+    buildSingle(name, path.resolve(componentDir, './index.ts'));
   }
 });
 

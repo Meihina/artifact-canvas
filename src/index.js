@@ -1,5 +1,5 @@
-import GlslCanvas from "./components/glsl-canvas/index.vue";
-import P5Canvas from "./components/p5-canvas/index.vue";
+import GlslCanvas from './components/glsl-canvas/index.vue';
+import P5Canvas from './components/p5-canvas/index.vue';
 
 export { GlslCanvas, P5Canvas };
 

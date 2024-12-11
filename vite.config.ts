@@ -1,22 +1,22 @@
 // import { resolve } from "path";
-import { defineConfig } from "vite";
+import { defineConfig } from 'vite';
 // import legacy from "@vitejs/plugin-legacy";
 // import babel from "vite-plugin-babel";
 // import dts from 'vite-plugin-dts';
 // import commonjs from 'vite-plugin-commonjs';
-import { glslify } from "vite-plugin-glslify";
-import { libInjectCss } from "vite-plugin-lib-inject-css";
-import vue from "@vitejs/plugin-vue";
+import { glslify } from 'vite-plugin-glslify';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
+import vue from '@vitejs/plugin-vue';
 // import { bucketInitialPlugin } from "./src/plugins/bucketInitial";
 
 const ENV = process.env.NODE_ENV;
 
-console.log("current ENV is: " + ENV);
+console.log('current ENV is: ' + ENV);
 
 export default defineConfig({
   publicDir: false,
   resolve: {
-    extensions: [".mjs", ".js", ".mts", ".ts", ".jsx", ".tsx", ".json"],
+    extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
   },
   plugins: [
     vue(),
@@ -41,7 +41,7 @@ export default defineConfig({
     // rollupOptions: {
     //   external: ["qs", "vue", "vue-router"]
     // },
-    outDir: "dist", // 输出文件名称
+    outDir: 'dist', // 输出文件名称
     modulePreload: {
       polyfill: true,
     },
