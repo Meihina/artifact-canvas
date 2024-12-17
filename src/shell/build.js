@@ -54,7 +54,7 @@ const buildSingle = async (name, entry) => {
         formats: ['es', 'cjs'],
       }, // 库编译模式配置
       rollupOptions: {
-        external: ['qs', 'vue'],
+        external: ['qs', 'vue', '../p5-canvas'],
         output: [
           {
             dir: `es/${name}`,
