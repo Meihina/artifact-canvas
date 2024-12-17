@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 
 import { defineConfig, build } from 'vite';
+// import { visualizer } from 'rollup-plugin-visualizer';
 
 const __dirname = path.resolve();
 const entryDir = path.resolve(__dirname, './src/components');
@@ -45,6 +46,15 @@ const buildAll = async () => {
 // ESM/CJS 单一构建方法
 const buildSingle = async (name, entry) => {
   const config = defineConfig({
+    // plugins: [
+    //   visualizer({
+    //     gzipSize: true,
+    //     brotliSize: true,
+    //     emitFile: false,
+    //     filename: `${name}-visual.html`, // 分析图生成的文件名
+    //     open: false, // 如果存在本地服务端口，将在打包后自动展示
+    //   }),
+    // ],
     publicDir: false,
     build: {
       lib: {
